@@ -19,12 +19,13 @@ const app = express();
 app.use(cors({
   origin: '*'
 }));
+const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 // app.use(express.static(__dirname));
-app.use(express.static('uploads'));
+app.use(express.static( path.join( __dirname,'/uploads')));
 app.use(express.json())
 
 app.use('/api/products', productRoutes)
@@ -36,8 +37,8 @@ app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
 
-// const __dirname = path.resolve()
-// app.use('/client/public/images', express.static(path.join(__dirname, '/client/public/images')))
+
+ app.use('/client/public/images', express.static(path.join(__dirname, '/client/public/images')))
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')))
