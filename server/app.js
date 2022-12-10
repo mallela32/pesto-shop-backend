@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
@@ -19,6 +20,9 @@ const app = express();
 app.use(cors({
   origin: '*'
 }));
+app.use(bodyParser.json({limit: '5mb', extended: true}))
+
+app.use(bodyParser.urlencoded({limit: '5mb', extended: true}))
 const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === 'development') {

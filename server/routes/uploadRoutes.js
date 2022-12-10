@@ -33,16 +33,17 @@ const upload = multer({
     checkFileType(file, cb)
   },
 })
+//const upload = multer().single('avatar')
 
 router.post('/', upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`)
 })
-// router.get('/', upload.single('image'), (req, res) => {
-//   res.send(`/${req.file.path}`)
-// })
-// router.post('/',(req, res) => {
-//   res.sendFile(__dirname + "/index.html");
-// })
+router.get('/', upload.single('image'), (req, res) => {
+  res.send(`/${req.file.path}`)
+})
+router.post('/',(req, res) => {
+  res.sendFile(__dirname + "/index.html");
+})
 
 
 export default router
