@@ -36,7 +36,12 @@ const upload = multer({
 //const upload = multer().single('avatar')
 
 router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`)
+  try {
+    res.send(`/${req.file.path}`)
+  } catch (error) {
+    res.send(error)
+  }
+ 
 })
 router.get('/', upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`)
