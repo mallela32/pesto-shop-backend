@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
+import cors from 'cors'
 
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
@@ -14,7 +15,10 @@ dotenv.config()
 
 connectDB()
 
-const app = express()
+const app = express();
+app.use(cors({
+  origin: '*'
+}));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
