@@ -11,30 +11,26 @@ import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import { nextTick } from 'process'
 
 dotenv.config()
 
 connectDB()
 
 const app = express();
-//const cors = cors();
-// app.use(function(req, res, next) {
-//   req.header("Access-Control-Allow-Origin", "*");
-//   req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-// const corsOptions ={
-//     origin:'*', 
-//     credentials:true,            //access-control-allow-credentials:true
-//     optionSuccessStatus:200
-// }
 app.use(cors());
-app.get("/", (req, res) => {
+app.use(function(req, res,next){
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Max-Age", "1800");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
    });
 app.use(bodyParser.json({limit: '5mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}))
