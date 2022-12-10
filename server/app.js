@@ -24,7 +24,6 @@ const __dirname = path.resolve()
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
-// app.use(express.static(__dirname));
 app.use(express.static( path.join( __dirname,'/uploads')));
 app.use(express.json())
 
