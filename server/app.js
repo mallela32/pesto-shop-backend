@@ -17,14 +17,17 @@ dotenv.config()
 connectDB()
 
 const app = express();
-app.use(function(req, res, next) {
-  req.header("Access-Control-Allow-Origin", "*");
-  req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-app.use(cors({
-  origin: '*'
-}));
+// app.use(function(req, res, next) {
+//   req.header("Access-Control-Allow-Origin", "*");
+//   req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json({limit: '5mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}))
 const __dirname = path.resolve()
