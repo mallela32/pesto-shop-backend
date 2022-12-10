@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
-import cors from 'cors'
+import cors  from 'cors'
 import bodyParser from 'body-parser'
 
 import productRoutes from './routes/productRoutes.js'
@@ -17,6 +17,7 @@ dotenv.config()
 connectDB()
 
 const app = express();
+//const cors = cors();
 // app.use(function(req, res, next) {
 //   req.header("Access-Control-Allow-Origin", "*");
 //   req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -28,6 +29,13 @@ const corsOptions ={
     optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
+app.get("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*")
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Max-Age", "1800");
+  res.setHeader("Access-Control-Allow-Headers", "content-type");
+  res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+   });
 app.use(bodyParser.json({limit: '5mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}))
 const __dirname = path.resolve()
