@@ -1,16 +1,18 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
-const router = express.Router()
+const router = express.Router();
+
+const path = path();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, __dirname)
   },
   filename(req, file, cb) {
     cb(
       null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+      new Date().toISOString() + file.originalname
     )
   },
 })
@@ -35,14 +37,14 @@ const upload = multer({
 })
 
 router.post('/', upload.single('image'), (req, res) => {
-  console.log('====================================');
-  console.log(req.body,req.file);
-  console.log('====================================');
   res.send(`/${req.file.path}`)
 })
-router.post('/',(req, res) => {
-  res.sendFile(__dirname + "/index.html");
-})
+// router.get('/', upload.single('image'), (req, res) => {
+//   res.send(`/${req.file.path}`)
+// })
+// router.post('/',(req, res) => {
+//   res.sendFile(__dirname + "/index.html");
+// })
 
 
 export default router
