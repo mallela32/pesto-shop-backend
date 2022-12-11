@@ -1,4 +1,4 @@
-# MERNSHOP
+# THE SHOP
 
 ![banner](airshopNext.png)
 
@@ -6,9 +6,7 @@
 
 Directory: [server/](/server/)
 
-## Client
 
-Directory: [client/](/client/)
 
 ## Preparing For Deployment
 
@@ -30,44 +28,32 @@ Create a build directory in the client directory,
 
 Esure you have the code, in your `app.js` in the server directory:
 
-```js
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/client/build')))
-
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  )
-} else {
-  app.get('/', (req, res) => {
-    res.send('API is running....')
-  })
-}
-```
-
 Run the server in production mode(simulator):
 
     $ npm start
 
-## Deploying to Heroku
+## Demo Login
 
-On the root, create a `Procfile` file:
+Admin Login
+  email:admin@gmail.com
+  password:123456
 
->Tells heroku how to run the project on the server.
+User Login
+   email : user@gmail.com
+   password:123456
 
-Add the following to the file:
 
-    $ web: node server/app.js
-
-Create a `heroku-postbuild` script in `package.json`:
-
-    $ "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-
-Add environment variables to Heroku's Config Vars.
 
 ## Bugs
 
 1. File Uploads
 
-## Working Updates
+## Authors
+Nitheesh and Rahul
 
-1. Re-write on Typescript
+## Licence
+
+MIT
+
+
+

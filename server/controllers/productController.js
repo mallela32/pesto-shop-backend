@@ -62,7 +62,7 @@ const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name: body.name,
     price: body.price,
-    image: req.file.filename,
+    image: body.image,
     brand: body.brand,
     category: body.category,
     countInStock: body.countInStock,
