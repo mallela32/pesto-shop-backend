@@ -60,6 +60,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const {body} = req
   const product = new Product({
+    user: '636513ff7fc059d87034179f',
     name: body.name,
     price: body.price,
     image: body.image,
